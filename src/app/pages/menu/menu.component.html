@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="apartado">
+    <ion-buttons slot="end" style="padding-right: 15px;">
+      <ion-button (click)="salir()">SALIR</ion-button>
+      <ion-icon (click)="salir()" name="log-out-outline"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="backgroundQR">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">MENÚ</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container" class="center">
+<!--   <ion-button id="btn_qr" expand="block" class="ion-margin" (ionChange)="QRscan($event)" (click)="action.isStart ? action.stop() : action.start()">{{action.isStart ? 'CANCELAR' : 'ESCANEAR QR'}}</ion-button>
+ -->
+<!--  <ion-button expand="block" class="ion-margin" (click)="startScan()">Escanear QR</ion-button> -->
+
+<ion-button expand="block" class="ion-margin apartado" (click)="startScan()">Escanear QR</ion-button>
+<ion-textarea [(ngModel)]="placa" type="text" inputmode="text" name="Text" rows="undefined" autoGrow="true" color="dark" placeholder="Ingrese la placa del movil"></ion-textarea>
+    <ion-button expand="block" class="ion-margin apartado" (click)="enviarPlaca()">Enviar placa</ion-button>
+<!--
+    <ion-label>{{enlace}}</ion-label>
+    <qrcode *ngIf="enlace"  [qrdata]="enlace" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+ -->
+    <!--     <a *ngIf="enlace" [href]="enlace" download="qrcode">DESCARGAR</a> -->
+<!--
+    <ion-textarea [(ngModel)]="myAngularxQrCode" type="text" inputmode="text" name="Text" rows="undefined" autoGrow="true" placeholder="Ingrese la placa del movil"></ion-textarea>
+    <qrcode *ngIf="myAngularxQrCode"  [qrdata]="myAngularxQrCode" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+ -->
+    <!--     <a *ngIf="myAngularxQrCode" [href]="myAngularxQrCode" download="qrcode">DESCARGAR</a> -->
+<!--
+    <ion-button expand="block" class="ion-margin">Vehículos</ion-button>
+<ion-button expand="block" class="ion-margin">Reportes</ion-button>
+
+<ngx-scanner-qrcode id="ngx-scanner-qrcode" #action="scanner" [config]="config" (event)="QRscanner($event, action)"></ngx-scanner-qrcode>
+ -->
+<!-- <span>{{ action.data.value | json }}</span>
+<span>{{ action.data | async | json }}</span> -->
+<!-- <p *ngIf="action.isLoading">⌛ CARGANDO...</p> -->
+
+  </div>
+</ion-content>

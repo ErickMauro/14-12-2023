@@ -1,0 +1,18 @@
+<ion-toolbar class="center toolbar">
+  <ion-buttons slot="start">
+    <ion-button (click)="closeModal()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    </ion-buttons>
+    <ion-label class="titulo">{{detalle.titulo}}</ion-label>
+    <ion-buttons slot="end">
+      <ion-button (click)="eliminarDetalle()">
+        <ion-icon color="danger" name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+</ion-toolbar>
+<ion-content>
+  <ion-grid [fixed]="true">
+    <ion-row>{{detalle.detalles}}</ion-row>
+  </ion-grid>
+</ion-content>

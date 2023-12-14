@@ -1,0 +1,146 @@
+#container {
+  text-align: center;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#container strong {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #8c8c8c;
+
+  margin: 0;
+}
+
+#container a {
+  text-decoration: none;
+}
+
+
+
+
+
+body {
+  margin: 0;
+  padding: 0;
+  background-size: cover;
+  font-family: sans-serif;
+  height: 100vh;
+}
+
+.login-box {
+  width: 320px;
+  height: 420px;
+  background: #006f09 !important;
+  color: #fff;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  padding: 70px 30px;
+  border-radius: 10px;
+  border-color: #e1de3d;
+  border-style: solid;
+}
+
+.login-text1 {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  color: #006f09 !important;
+}
+
+.login-text2 {
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  color: #006f09 !important;
+}
+
+.btn{
+  --background: #e1de3d !important;
+  color: #006f09 !important;
+}
+
+.btn:active{
+  --background: #006f09 !important;
+  color: #e1de3d !important;
+}
+
+.login-box h3 {
+  margin: 0;
+  padding: 0 0 20px;
+  text-align: center;
+  font-size: 22px;
+}
+
+.login-box label {
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  display: block;
+}
+
+.login-box ion-input {
+  width: 100%;
+  margin-bottom: 20px;
+}
+/*
+.login-box ion-input[type="text"], .login-box ion-input[type="password"] {
+  border: none;
+  border-bottom: 1px solid #fff;
+  background: transparent;
+  outline: none;
+  height: 40px;
+  color: #fff;
+  font-size: 16px;
+}
+
+.login-box ion-input[type="submit"] {
+  border: none;
+  outline: none;
+  height: 40px;
+  background: #b80f22;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 20px;
+}
+
+.login-box ion-input[type="submit"]:hover {
+  cursor: pointer;
+  background: #ffc107;
+  color: #000;
+}
+
+.login-box ion-label {
+  text-decoration: none;
+  font-size: 12px;
+  line-height: 20px;
+  color: darkgrey;
+}
+
+.login-box ion-label:hover {
+  color: #fff;
+}
+
+.loginRegister{
+  margin-top: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 300px !important;
+}
+
+.white{
+  color: white;
+}
+ */
+

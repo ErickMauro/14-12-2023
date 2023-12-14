@@ -1,0 +1,794 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<ion-toolbar class="apartado">
+  <ion-buttons slot="start">
+    <ion-button (click)="goBack()">
+      <ion-icon style="color: #e1de3d;" name="arrow-back-outline"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-buttons slot="end">
+    <ion-button (click)="guardarDetalles()">
+      <ion-icon style="color: #e1de3d;" name="save-outline"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+<!--   <ion-buttons slot="end">
+    <ion-button (click)="eliminarDetalles()">
+      <ion-icon color="danger" name="trash-outline"></ion-icon>
+    </ion-button>
+  </ion-buttons> -->
+</ion-toolbar>
+<ion-content>
+
+  <ion-grid [fixed]="true" class="borde_grid center">
+
+    <ion-row>
+      <ion-col size="12" size-sm="12" size-md="2" size-lg="2">
+        <ion-img class="center" style="max-height: 100px; max-width: 100px;" src="https://lacasadetono.mx/wp-content/uploads/2022/03/lct-1024x706.png"></ion-img>
+      </ion-col>
+      <ion-col size="12" size-sm="12" size-md="8" size-lg="8">
+        <ion-item class="center bold">
+          <ion-label class="ion-text-wrap">
+            CHECK LIST DIARIO USO DE UNIDADES
+          </ion-label>
+        </ion-item>
+        </ion-col>
+        <ion-col size="12" size-sm="12" size-md="2" size-lg="2">
+        </ion-col>
+    </ion-row>
+<br>
+
+<ion-row class="apartado ion-hide-sm-up" size="12" size-sm="12" (click)="ocultarGeneral()">
+  <ion-col size="1"></ion-col>
+  <ion-col class="center" size="10">
+  <ion-label>GENERALES</ion-label>
+</ion-col>
+<ion-col style="text-align: end;" size="1">
+  <ion-icon style="vertical-align: middle;" name="chevron-up-sharp" *ngIf="hideGeneral === false"></ion-icon>
+  <ion-icon style="vertical-align: middle;" name="chevron-down-sharp" *ngIf="hideGeneral === true"></ion-icon>
+</ion-col>
+</ion-row>
+
+<div *ngIf="hideGeneral === false">
+
+    <ion-row class="center">
+      <ion-col size="12" size-sm="12" size-md="4" size-lg="4">
+        <ion-item class="">
+          <ion-label position="floating">
+            TIPO DE VEHÍCULO:
+          </ion-label>
+          <ion-input name="celular" [(ngModel)]="crudService.vehiculo.tipo_vehiculo" type="text" class="white"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12" size-sm="12" size-md="4" size-lg="4">
+        <ion-item class="">
+          <ion-label position="floating">
+            ÁREA:
+          </ion-label>
+          <ion-input name="celular" [(ngModel)]="crudService.vehiculo.area" type="text" class="white"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12" size-sm="12" size-md="4" size-lg="4">
+        <ion-item class="">
+          <ion-label position="floating">
+            N°. ECONÓMICO:
+          </ion-label>
+          <ion-input name="celular" [(ngModel)]="crudService.vehiculo.n_economico" type="number" class="white"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="center">
+      <ion-col size="12" size-sm="12" size-md="6" size-lg="6">
+        <ion-item class="">
+          <ion-label position="floating">
+            CONDUCTOR:
+          </ion-label>
+          <ion-input name="celular" [(ngModel)]="crudService.vehiculo.conductor" type="text" class="white"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12" size-sm="12" size-md="6" size-lg="6">
+        <ion-item class="">
+          <ion-label position="floating">
+            PLACA:
+          </ion-label>
+          <ion-input name="celular" [(ngModel)]="crudService.vehiculo.placa" type="text" class="white"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="center">
+      <ion-col size="12" size-sm="12" size-md="6" size-lg="6">
+        <ion-item class="">
+          <ion-label position="floating">
+            EMPRESA:
+          </ion-label>
+          <ion-input name="celular" [(ngModel)]="crudService.vehiculo.empresa" type="text" class="white"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12" size-sm="12" size-md="6" size-lg="6" id="open-modal">
+        <ion-item class="">
+          <ion-label>
+            FECHA:
+          </ion-label>
+          <ion-icon expand="block" name="calendar-sharp"></ion-icon>
+          <!-- <ion-input name="celular" [(ngModel)]="checklist.fecha" type="text" class="white"></ion-input> -->
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+      <ng-template>
+        <ion-content class="ion-padding">
+          <ion-item>
+            <ion-datetime #datetime (ionChange)="obtenerFecha($event)" [(ngModel)]="crudService.vehiculo.fecha"
+            [showDefaultButtons]="true"
+            doneText="SELECCIONAR"
+            cancelText=""
+            presentation="date"
+            mode="ios"
+            class="">
+<!--               <ion-buttons slot="buttons">
+                <ion-button color="danger" (click)="cancel()">Cancelar</ion-button>
+                <ion-button color="primary" (click)="confirm()">Confirmar</ion-button>
+              </ion-buttons> -->
+            </ion-datetime>
+          </ion-item>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+
+    <ion-row class="center">
+      <ion-col size="12" size-sm="12" size-md="4" size-lg="6">
+        <ion-row>
+        <ion-item class="">
+          <ion-label position="floating">
+            VIN:
+          </ion-label>
+          <ion-input disabled="true" name="celular" [(ngModel)]="crudService.vehiculo.vin" type="text" class="white"></ion-input>
+        </ion-item>
+        <ion-item class="">
+          <ion-label position="floating">
+            MARCA:
+          </ion-label>
+          <ion-input name="celular" [(ngModel)]="crudService.vehiculo.marca" type="text" class="white"></ion-input>
+        </ion-item>
+    </ion-row>
+    </ion-col>
+
+      <ion-col size="12" size-sm="12" size-md="4" size-lg="4">
+        <ion-item class="">
+          <ion-label position="floating">
+            KILOMETRAJE:
+          </ion-label>
+          <ion-input name="celular" [(ngModel)]="crudService.vehiculo.kilometraje" type="number" class="white"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12" size-sm="12" size-md="4" size-lg="4" class="center" style="align-content: center;">
+        <ion-img class="center" style="max-height: 120px; max-width: 120px;" name="image" src="https://firebasestorage.googleapis.com/v0/b/tallergeneral-8b096.appspot.com/o/kilometraje.png?alt=media&token=a43f4e2a-b58b-49c2-9cbf-b82383953963"></ion-img>
+      </ion-col>
+    </ion-row>
+
+    <br>
+    <ion-row>
+        <ion-label class="minus bold ion-text-wrap">CADA CONDUCTOR REALIZARA EL CHECK LIST DE SU VEHICULO, DE ENCONTRAR ALGUNA NOVEDAD, DEBERA INFORMAR AL AREA DE ADMINISTRACION, QUIEN TOMARA LAS ACCIONES CORRECTIVAS NECESARIAS</ion-label>
+    </ion-row>
+    <br>
+
+  </div>
+
+    <ion-row class="apartado apartado ion-hide-md-down"><ion-label class="center">INVENTARIO</ion-label></ion-row>
+
+    <ion-row class="apartado ion-hide-sm-up" size="12" size-sm="12" (click)="ocultarInventario()" >
+      <ion-col size="1"></ion-col>
+      <ion-col class="center" size="10">
+      <ion-label>INVENTARIO</ion-label>
+    </ion-col>
+    <ion-col style="text-align: end;" size="1">
+      <ion-icon style="vertical-align: middle;" name="chevron-up-sharp" *ngIf="hideInventario === false"></ion-icon>
+      <ion-icon style="vertical-align: middle;" name="chevron-down-sharp" *ngIf="hideInventario === true"></ion-icon>
+    </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="hideInventario === false">
+      <ion-row class="center">
+        <ion-col size="12" size-sm="12" size-md="4" size-lg="3">
+          <ion-item class="minus">
+            <ion-checkbox [checked]="crudService.detalle.gato" (ionChange)="changeCheckbox_gato($event, 'gato')" (ionChange)="changeCheckbox_gato($event, 'gato')">GATO</ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12" size-sm="12" size-md="4" size-lg="3">
+          <ion-item class="minus">
+            <ion-checkbox [checked]="crudService.detalle.triangulos" (ionChange)="changeCheckbox_triangulos($event, 'triangulos')">TRIÁNGULO</ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12" size-sm="12" size-md="4" size-lg="3">
+          <ion-item class="minus">
+            <ion-checkbox [checked]="crudService.detalle.antena" (ionChange)="changeCheckbox_antena($event, 'antena')">ANTENA</ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12" size-sm="12" size-md="4" size-lg="3">
+          <ion-item class="minus">
+            <ion-checkbox [checked]="crudService.detalle.tapones_rueda" (ionChange)="changeCheckbox_tapones_rueda($event, 'tapones_rueda')">TAPONES DE RUEDA</ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12" size-sm="12" size-md="4" size-lg="3">
+          <ion-item class="minus">
+            <ion-checkbox [checked]="crudService.detalle.estereo" (ionChange)="changeCheckbox_estereo($event, 'estereo')">ESTÉREO</ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12" size-sm="12" size-md="4" size-lg="3">
+          <ion-item class="minus">
+            <ion-checkbox [checked]="crudService.detalle.llanta_relacion" (ionChange)="changeCheckbox_llanta_relacion($event, 'llanta_relacion')">LLANTA REFACCIÓN</ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12" size-sm="12" size-md="4" size-lg="3">
+          <ion-item class="minus">
+            <ion-checkbox [checked]="crudService.detalle.herramientas" (ionChange)="changeCheckbox_herramientas($event, 'herramientas')">HERRAMIENTAS</ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12" size-sm="12" size-md="4" size-lg="3">
+          <ion-item class="minus">
+            <ion-checkbox [checked]="crudService.detalle.tapetes" (ionChange)="changeCheckbox_tapetes($event, 'tapetes')">TAPETES</ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12" size-sm="12" size-md="4" size-lg="3">
+          <ion-item class="minus">
+            <ion-checkbox [checked]="crudService.detalle.emblemas" (ionChange)="changeCheckbox_emblemas($event, 'emblemas')">EMBLEMAS</ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12" size-sm="12" size-md="4" size-lg="3">
+          <ion-item class="minus">
+            <ion-checkbox [checked]="crudService.detalle.cables" (ionChange)="changeCheckbox_cables($event, 'cables')">CABLES</ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12" size-sm="12" size-md="4" size-lg="3">
+          <ion-item class="minus">
+            <ion-checkbox [checked]="crudService.detalle.encendedor" (ionChange)="changeCheckbox_encendedor($event, 'encendedor')">ENCENDEDOR</ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12" size-sm="12" size-md="4" size-lg="3">
+          <ion-item class="minus">
+            <ion-checkbox [checked]="crudService.detalle.extintor" (ionChange)="changeCheckbox_extintor($event, 'extintor')">EXTINTOR</ion-checkbox>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-row>
+
+<ion-row>
+  <ion-col size="12" size-lg="12" size-md="4" size-lg="4">
+
+    <ion-row class="apartado apartado ion-hide-md-down"><ion-label class="center">SISTEMA DE LUCES</ion-label></ion-row>
+
+    <ion-row class="apartado ion-hide-sm-up" size="12" size-sm="12" (click)="ocultarSistemaLuces()" >
+      <ion-col size="1"></ion-col>
+      <ion-col class="center" size="10">
+      <ion-label>SISTEMA DE LUCES</ion-label>
+    </ion-col>
+    <ion-col style="text-align: end;" size="1">
+      <ion-icon style="vertical-align: middle;" name="chevron-up-sharp" *ngIf="hideSistemaLuces === false"></ion-icon>
+      <ion-icon style="vertical-align: middle;" name="chevron-down-sharp" *ngIf="hideSistemaLuces === true"></ion-icon>
+    </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="hideSistemaLuces === false">
+      <ion-row class="center">
+        <ion-col>
+          <ion-item class="minus">
+          <ion-col>
+            <ion-select (ionChange)="changeSelect_luz_delantera_alta($event, '')" label="Luz delantera alta (NN)*:" aria-label="Fruit" interface="popover" [value]="crudService.detalle.luz_delantera_alta">
+              <ion-select-option *ngFor="let estado of estado_vehiculo">{{estado}}</ion-select-option>
+            </ion-select>
+          </ion-col>
+          </ion-item>
+          <ion-item class="minus">
+            <ion-select (ionChange)="changeSelect_luz_delantera_baja($event, '')" label="Luz delantera baja (NN)*:" aria-label="Fruit" interface="popover" [value]="crudService.detalle.luz_delantera_baja">
+              <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item class="minus">
+            <ion-select (ionChange)="changeSelect_luces_emergencia($event, '')" label="Luces de emergencia (NN)*:" aria-label="Fruit" interface="popover" [value]="crudService.detalle.luces_emergencia">
+              <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item class="minus">
+            <ion-select (ionChange)="changeSelect_luces_neblineros($event, '')" label="Luces neblineros:" aria-label="Fruit" interface="popover" [value]="crudService.detalle.luces_neblineros">
+              <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item class="minus">
+            <ion-select (ionChange)="changeSelect_luz_direccional($event, '')" label="Luz direccional:" aria-label="Fruit" interface="popover" [value]="crudService.detalle.luz_direccional">
+              <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item class="minus">
+            <ion-select (ionChange)="changeSelect_luz_freno_posterior($event, '')" label="Luz de freno posterior:" aria-label="Fruit" interface="popover" [value]="crudService.detalle.luz_freno_posterior">
+              <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+            </ion-select>
+
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-row>
+
+    </ion-col>
+
+
+    <ion-col size="12" size-lg="12" size-md="4" size-lg="4">
+    <ion-row class="apartado apartado ion-hide-md-down"><ion-label class="center">PARTE EXTERNA</ion-label></ion-row>
+
+    <ion-row class="apartado ion-hide-sm-up" size="12" size-sm="12" (click)="ocultarParteExterna()" >
+      <ion-col size="1"></ion-col>
+      <ion-col class="center" size="10">
+      <ion-label>PARTE EXTERNA</ion-label>
+    </ion-col>
+    <ion-col style="text-align: end;" size="1">
+      <ion-icon style="vertical-align: middle;" name="chevron-up-sharp" *ngIf="hideParteExterna === false"></ion-icon>
+      <ion-icon style="vertical-align: middle;" name="chevron-down-sharp" *ngIf="hideParteExterna === true"></ion-icon>
+    </ion-col>
+    </ion-row>
+    <ion-row *ngIf="hideParteExterna === false">
+      <ion-row class="center">
+        <ion-col>
+          <ion-item class="minus">
+            <ion-select (ionChange)="changeSelect_parabrisas_delantero($event, '')" label="Parabrisas delantero:" aria-label="Fruit" interface="popover" [value]="crudService.detalle.parabrisas_delantero">
+              <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item class="minus">
+            <ion-select (ionChange)="changeSelect_medallon_trasero($event, '')" label="Medallon trasero:" aria-label="Fruit" interface="popover" [value]="crudService.detalle.medallon_trasero">
+              <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item class="minus">
+            <ion-select (ionChange)="changeSelect_limpia_parabrisas($event, '')" label="Limpia parabrisas:" aria-label="Fruit" interface="popover" [value]="crudService.detalle.limpia_parabrisas">
+              <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item class="minus">
+            <ion-select (ionChange)="changeSelect_espejos_laterales($event, '')" label="Espejos laterales:" aria-label="Fruit" interface="popover" [value]="crudService.detalle.espejos_laterales">
+              <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item class="minus">
+            <ion-select (ionChange)="changeSelect_espejo_retrovisor($event, '')" label="Espejo retrovisor:" aria-label="Fruit" interface="popover" [value]="crudService.detalle.espejo_retrovisor">
+              <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-row>
+
+    </ion-col>
+
+    <ion-col size="12" size-lg="12" size-md="4" size-lg="4">
+    <ion-row class="apartado apartado ion-hide-md-down"><ion-label class="center">PARTE INTERNA</ion-label></ion-row>
+
+    <ion-row class="apartado ion-hide-sm-up" size="12" size-sm="12" (click)="ocultarParteInterna()" >
+      <ion-col size="1"></ion-col>
+      <ion-col class="center" size="10">
+      <ion-label>PARTE INTERNA</ion-label>
+    </ion-col>
+    <ion-col style="text-align: end;" size="1">
+      <ion-icon style="vertical-align: middle;" name="chevron-up-sharp" *ngIf="hideParteInterna === false"></ion-icon>
+      <ion-icon style="vertical-align: middle;" name="chevron-down-sharp" *ngIf="hideParteInterna === true"></ion-icon>
+    </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="hideParteInterna === false">
+      <ion-row class="center">
+        <ion-col>
+          <ion-item class="minus">
+            <ion-select (ionChange)="changeSelect_estado_tablero($event, '')" label="Estado de tablero / indicadores operativos:" aria-label="Fruit" interface="popover" [value]="crudService.detalle.estado_tablero">
+              <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item class="minus">
+            <ion-select (ionChange)="changeSelect_freno_mano($event, '')" label="Freno de mano (NN)*:" aria-label="Fruit" interface="popover" [value]="crudService.detalle.freno_mano">
+              <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item class="minus">
+            <ion-select (ionChange)="changeSelect_freno_servicio($event, '')" label="Freno de servicio (NN)*:" aria-label="Fruit" interface="popover" [value]="crudService.detalle.freno_servicio">
+              <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item class="minus">
+            <ion-select (ionChange)="changeSelect_cinturon_seguridad_chofer($event, '')" label="Cinturón de seguridad chofer (NN)*:" aria-label="Fruit" interface="popover" [value]="crudService.detalle.cinturon_seguridad_chofer">
+              <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item class="minus">
+            <ion-select (ionChange)="changeSelect_cinturon_seguridad_copiloto($event, '')" label="Cinturón de seguridad copiloto (NN)*:" aria-label="Fruit" interface="popover" [value]="crudService.detalle.cinturon_seguridad_copiloto">
+              <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item class="minus">
+            <ion-select (ionChange)="changeSelect_cinturon_seguridad_asiento_posterior($event, '')" label="Cinturón de seguridad asiento posterior (NN)*:" aria-label="Fruit" interface="popover" [value]="crudService.detalle.cinturon_seguridad_asiento_posterior">
+              <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item class="minus">
+            <ion-select (ionChange)="changeSelect_espejo_retrovisor_antideslumbrante($event, '')" label="Espejo retrovisor antideslumbrante:" aria-label="Fruit" interface="popover" [value]="crudService.detalle.espejo_retrovisor_antideslumbrante">
+              <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item class="minus">
+            <ion-select (ionChange)="changeSelect_linterna_mano($event, '')" label="Linterna de mano" aria-label="Fruit" interface="popover" [value]="crudService.detalle.linterna_mano">
+              <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item class="minus">
+            <ion-select (ionChange)="changeSelect_orden_limpieza_cabina($event, '')" label="Orden y limpieza de cabina" aria-label="Fruit" interface="popover" [value]="crudService.detalle.orden_limpieza_cabina">
+              <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item class="minus">
+            <ion-select (ionChange)="changeSelect_direccion($event, '')" label="Dirección (NN)*" aria-label="Fruit" interface="popover" [value]="crudService.detalle.direccion">
+              <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-row>
+
+    </ion-col>
+
+    </ion-row>
+
+
+
+
+
+    <ion-row>
+    <ion-col size="12" size-lg="12" size-md="4" size-lg="4">
+      <ion-row class="apartado apartado ion-hide-md-down"><ion-label class="center">ESTADO DE LLANTAS</ion-label></ion-row>
+
+      <ion-row class="apartado ion-hide-sm-up" size="12" size-sm="12" (click)="ocultarEstadoLlantas()" >
+        <ion-col size="1"></ion-col>
+        <ion-col class="center" size="10">
+        <ion-label>ESTADO DE LLANTAS</ion-label>
+      </ion-col>
+      <ion-col style="text-align: end;" size="1">
+        <ion-icon style="vertical-align: middle;" name="chevron-up-sharp" *ngIf="hideEstadoLlantas === false"></ion-icon>
+        <ion-icon style="vertical-align: middle;" name="chevron-down-sharp" *ngIf="hideEstadoLlantas === true"></ion-icon>
+      </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="hideEstadoLlantas === false">
+        <ion-row class="center">
+          <ion-col>
+            <ion-item class="minus">
+              <ion-select (ionChange)="changeSelect_llanta_delantera_derecha($event, '')" label="Llanta delantera derecha:" aria-label="Fruit" interface="popover" [value]="crudService.detalle.llanta_delantera_derecha">
+                <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item class="minus">
+              <ion-select (ionChange)="changeSelect_llanta_delantera_izquierda($event, '')" label="Llanta delantera izquierte:" aria-label="Fruit" interface="popover" [value]="crudService.detalle.llanta_delantera_izquierda">
+                <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item class="minus">
+              <ion-select (ionChange)="changeSelect_llanta_posterior_derecha($event, '')" label="Llanta posterior derecha:" aria-label="Fruit" interface="popover" [value]="crudService.detalle.llanta_posterior_derecha">
+                <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item class="minus">
+              <ion-select (ionChange)="changeSelect_llanta_posterior_izquierda($event, '')" label="Llanta posterior izquierda:" aria-label="Fruit" interface="popover" [value]="crudService.detalle.llanta_posterior_izquierda">
+                <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item class="minus">
+              <ion-select (ionChange)="changeSelect_llanta_repuesto($event, '')" label="Llanta de repuesto:" aria-label="Fruit" interface="popover" [value]="crudService.detalle.llanta_repuesto">
+                <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-row>
+
+    </ion-col>
+
+
+    <ion-col size="12" size-lg="12" size-md="4" size-lg="4">
+      <ion-row class="apartado apartado ion-hide-md-down"><ion-label class="center">ACCESORIOS DE SEGURIDAD</ion-label></ion-row>
+
+      <ion-row class="apartado ion-hide-sm-up" size="12" size-sm="12" (click)="ocultarAccesoriosSeguridad()" >
+        <ion-col size="1"></ion-col>
+        <ion-col class="center" size="10">
+        <ion-label>ACCESORIOS DE SEGURIDAD</ion-label>
+      </ion-col>
+      <ion-col style="text-align: end;" size="1">
+        <ion-icon style="vertical-align: middle;" name="chevron-up-sharp" *ngIf="hideAccesoriosSeguridad === false"></ion-icon>
+        <ion-icon style="vertical-align: middle;" name="chevron-down-sharp" *ngIf="hideAccesoriosSeguridad === true"></ion-icon>
+      </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="hideAccesoriosSeguridad === false">
+        <ion-row class="center">
+          <ion-col>
+            <ion-item class="minus">
+              <ion-select (ionChange)="changeSelect_conos_seguridad($event, '')" label="Conos de seguridad (2):" aria-label="Fruit" interface="popover" [value]="crudService.detalle.conos_seguridad">
+                <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item class="minus">
+              <ion-select (ionChange)="changeSelect_accesorios_seguridad_extintor($event, '')" label="Extintor:" aria-label="Fruit" interface="popover" [value]="crudService.detalle.accesorios_seguridad_extintor">
+                <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item class="minus">
+              <ion-select (ionChange)="changeSelect_alarma_retrosesos($event, '')" label="Alarma de retrocesos (NN)*:" aria-label="Fruit" interface="popover" [value]="crudService.detalle.alarma_retrosesos">
+                <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item class="minus">
+              <ion-select (ionChange)="changeSelect_claxon($event, '')" label="Claxon (NN)*:" aria-label="Fruit" interface="popover" [value]="crudService.detalle.claxon">
+                <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-row>
+
+    </ion-col>
+
+    <ion-col size="12" size-lg="12" size-md="4" size-lg="4">
+      <ion-row class="apartado apartado ion-hide-md-down"><ion-label class="center">TAPAS Y OTROS</ion-label></ion-row>
+
+      <ion-row class="apartado ion-hide-sm-up" size="12" size-sm="12" (click)="ocultarTapasOtros()" >
+        <ion-col size="1"></ion-col>
+        <ion-col class="center" size="10">
+        <ion-label>TAPAS Y OTROS</ion-label>
+      </ion-col>
+      <ion-col style="text-align: end;" size="1">
+        <ion-icon style="vertical-align: middle;" name="chevron-up-sharp" *ngIf="hideTapasOtros === false"></ion-icon>
+        <ion-icon style="vertical-align: middle;" name="chevron-down-sharp" *ngIf="hideTapasOtros === true"></ion-icon>
+      </ion-col>
+      </ion-row>
+
+      <div *ngIf="hideTapasOtros === false">
+      <ion-row>
+        <ion-row class="center">
+          <ion-col>
+            <ion-item class="minus">
+              <ion-select (ionChange)="changeSelect_tapa_tanque_gasolina($event, '')" label="Tapa de tanque de gasolina:" aria-label="Fruit" interface="popover" [value]="crudService.detalle.tapa_tanque_gasolina">
+                <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item class="minus">
+              <ion-select (ionChange)="changeSelect_gato_hidraulico($event, '')" label="Gato hidráulico:" aria-label="Fruit" interface="popover" [value]="crudService.detalle.gato_hidraulico">
+                <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item class="minus">
+              <ion-select (ionChange)="changeSelect_herramientas_llaves_ruedas($event, '')" label="Herramientas y llaves de ruedas:" aria-label="Fruit" interface="popover" [value]="crudService.detalle.herramientas_llaves_ruedas">
+                <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item class="minus">
+              <ion-select (ionChange)="changeSelect_cables_pasa_corriente($event, '')" label="Cables para corriente:" aria-label="Fruit" interface="popover" [value]="crudService.detalle.cables_pasa_corriente">
+                <ion-select-option *ngFor="let estado of estado_vehiculo" [value]="estado">{{estado}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-row>
+
+    </div>
+
+    </ion-col>
+
+    </ion-row>
+    <br>
+    <ion-row *ngIf="hideTapasOtros === false">
+      <ion-label class="minus bold ion-text-wrap"> (*) Los puntos NN (NO NEGOCIABLES) indica que el conductor no deber movilizar el vehículo hasta su corrección de manera inmediata.</ion-label>
+    </ion-row>
+    <br>
+    <ion-row>
+      <ion-col class="borde_grid" size="12" size-sm="12" size-md="3" size-lg="3" style="max-height: 80px;" *ngIf="hideTapasOtros === false">
+        <ion-row>
+          <ion-label class="minus bold center">LEYENDA</ion-label>
+        </ion-row>
+        <ion-row>
+          <ion-label class="minus center">B = BUENO</ion-label>
+        </ion-row>
+        <ion-row>
+          <ion-label class="minus center">M = MAL ESTADO</ion-label>
+        </ion-row>
+        <ion-row>
+          <ion-label class="minus center">NA = NO APLICA</ion-label>
+        </ion-row>
+        <ion-row>
+          <ion-label class="minus center">NN = NO NEGOCIABLE</ion-label>
+        </ion-row>
+      </ion-col>
+
+      <ion-col size="1" size-sm="0" size-md="1" size-lg="1"></ion-col>
+
+      <ion-col class="borde_grid" size="12" size-sm="12" size-md="8" size-lg="8">
+        <ion-row>
+          <ion-label class="bold center">OBSERVACIONES</ion-label>
+        </ion-row>
+        <ion-row>
+          <ion-textarea [(ngModel)]="crudService.detalle.observaciones" mode="ios" auto-grow="true"></ion-textarea>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <br>
+    <ion-row>
+      <ion-label class="minus bold ion-text-wrap" color="danger">Afirmo que lo registrado en este formato es conforme a lo verificado en la fecha y hora</ion-label>
+    </ion-row>
+    <br>
+<!--       <swiper-container (slidechange)="onSlideChange('hi')" class="slides" pager="true" [modules]="swiperModules" effect="coverflow" [loop]="true">
+        <swiper-slide *ngFor="let foto of crudService.fotos_vehiculo">
+          <canvas id="myCanvasVehiculo{{foto.id}}" (click)="onImageClick($event)">
+            <img (click)="onImageClick($event)" #myImageVehiculo src={{foto.imagen}}>
+            </canvas>
+        </swiper-slide>
+      </swiper-container>
+ -->
+<!--       <ion-row>
+        <ion-row>
+        <ion-col>
+        <canvas #myCanvasVehiculo1 (click)="onImageClick($event)">
+          <img (click)="onImageClick($event)" style="max-height: 251px; max-width: 401px; min-height: 250px; min-width: 350px;"
+           #myImageVehiculo>
+       </canvas>
+      </ion-col>
+      <ion-col>
+        <canvas #myCanvasVehiculo2 (click)="onImageClick($event)">
+          <img (click)="onImageClick($event)" style="max-height: 251px; max-width: 401px; min-height: 250px; min-width: 350px;"
+           #myImageVehiculo>
+       </canvas>
+      </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+        <canvas #myCanvasVehiculo3 (click)="onImageClick($event)">
+          <img (click)="onImageClick($event)" style="max-height: 251px; max-width: 401px; min-height: 250px; min-width: 350px;"
+           #myImageVehiculo>
+       </canvas>
+      </ion-col>
+      <ion-col>
+        <canvas #myCanvasVehiculo4 (click)="onImageClick($event)">
+          <img (click)="onImageClick($event)" style="max-height: 251px; max-width: 401px; min-height: 250px; min-width: 350px;"
+           #myImageVehiculo>
+       </canvas>
+      </ion-col>
+      </ion-row>
+      </ion-row>
+ -->
+      <!--
+    <ion-row>
+      <ion-row>
+      <ion-col>
+      <canvas #myCanvasVehiculo1 (click)="onImageClick($event)">
+        <img (click)="onImageClick($event)" style="max-height: 251px; max-width: 401px; min-height: 250px; min-width: 350px;"
+         #myImageVehiculo>
+     </canvas>
+    </ion-col>
+    <ion-col>
+      <canvas #myCanvasVehiculo2 (click)="onImageClick($event)">
+        <img (click)="onImageClick($event)" style="max-height: 251px; max-width: 401px; min-height: 250px; min-width: 350px;"
+         #myImageVehiculo>
+     </canvas>
+    </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+      <canvas #myCanvasVehiculo3 (click)="onImageClick($event)">
+        <img (click)="onImageClick($event)" style="max-height: 251px; max-width: 401px; min-height: 250px; min-width: 350px;"
+         #myImageVehiculo>
+     </canvas>
+    </ion-col>
+    <ion-col>
+      <canvas #myCanvasVehiculo4 (click)="onImageClick($event)">
+        <img (click)="onImageClick($event)" style="max-height: 251px; max-width: 401px; min-height: 250px; min-width: 350px;"
+         #myImageVehiculo>
+     </canvas>
+    </ion-col>
+    </ion-row>
+    </ion-row>
+ -->
+
+ <ion-row>
+      <ion-col size="12" size-sm="12" size-md="6" size-lg="6">
+      <!-- <ion-img src="https://www.eventosmotor.com/wp-content/uploads/2021/02/red-bull-f1-2021-blog-premium-eventosmotor.jpg"></ion-img> -->
+
+      <canvas #myCanvasVehiculo (click)="onImageClick($event)">
+           <img (click)="onImageClick($event)" style="max-height: 251px; max-width: 401px; min-height: 250px; min-width: 350px;"
+            #myImageVehiculo>
+        </canvas>
+
+      </ion-col>
+
+    <ion-col class="borde_grid" size="12" size-sm="12" size-md="6" size-lg="6">
+      <ion-row>
+        <ion-label class="bold center">OBSERVACIONES DE CHOQUES Y RASPADURAS</ion-label>
+      </ion-row>
+      <ion-row>
+<!--         <ion-input (ionChange)="changeTamañoObservacion($event)"></ion-input> -->
+      </ion-row>
+<!--       <ion-row>
+        <ion-button (click)="takePicture()"></ion-button>
+      </ion-row>
+      <ion-row>
+        <ion-img src="{{crudService.detalle.autoriza_supervisor}}"></ion-img>
+      </ion-row>
+      <ion-row>
+        <input (change)="newImageUpload($event)" type="file" accept="image/*" placeholder="Subir foto del producto">
+      </ion-row> -->
+      <ion-row>
+        <ion-list *ngFor="let observacion of crudService.observacionesChoquesRaspaduras">
+            <ion-label>{{observacion.numero}}.-{{observacion.titulo}}</ion-label>
+        </ion-list><!--         <ion-textarea mode="ios" auto-grow="true" disabled="true"></ion-textarea> -->
+      </ion-row>
+    </ion-col>
+    </ion-row>
+<!--
+    <ion-modal trigger="open-detalle" (willDismiss)="onWillDismiss($event)">
+      <ng-template>
+        <ion-content class="ion-padding">
+          <ion-toolbar>
+            <ion-title>{{detalle[0].titulo}}</ion-title>
+          </ion-toolbar>
+          <ion-item>
+            <ion-label>{{detalle[0].detalles}}</ion-label>
+          </ion-item>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+ -->
+<br><br><br><br>
+<!--
+<ion-row>
+  <ion-item>
+    <ion-label position="stacked">Imagen</ion-label>
+    <ion-input type="file" (change)="onFileChange($event)"></ion-input>
+  </ion-item>
+</ion-row>
+
+<ion-row>
+  <input (change)="newImage($event)" id="file-upload-categoria" style="display: none;" type="file" accept="image/*" placeholder="Subir foto del vehículo">
+</ion-row>
+ -->
+<ion-row>
+  <ion-col>
+    <div id="canvas">
+      <canvas class="center" #canvas (touchstart)="startDrawing($event)" (touchmove)="moved($event)"></canvas>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-button color="danger" (click)="clearPad()">Borrar</ion-button>
+          </ion-col>
+<!--           <ion-col size="4" offset="2">
+            <ion-button color="secondary" (click)="savePad()">Save</ion-button>
+          </ion-col> -->
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-col>
+</ion-row>
+
+    <ion-row>
+      <ion-col class="center">
+        <ion-label>CONDUCTOR</ion-label>
+      </ion-col>
+<!--       <ion-col class="center">
+        <ion-label>SUPERVISOR</ion-label>
+      </ion-col> -->
+    </ion-row>
+
+<!--
+    <img src='{{ signatureImg }}' />
+ -->
+ <br>
+    <ion-row>
+      <ion-label class="minus bold ion-text-wrap" color="danger">Por Fines de Auditorías, Inspecciones e Investigaciones este documento no deberá presentar tachaduras, borraduras, enmendaduras, ni alteraciones de ningún tipo.</ion-label>
+    </ion-row>
+    <br>
+
+  </ion-grid>
+
+</ion-content>

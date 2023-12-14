@@ -1,0 +1,56 @@
+.minus {
+  font-size: 10px;
+}
+
+.borde_grid {
+  border-color: black;
+  border-style:solid;
+}
+
+@media (min-width:720px){
+  .acordeon {
+    display: none;
+  }
+}
+
+.image-container {
+  position: relative;
+}
+
+.image-container, canvas {
+//  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.mi-div {
+//  cursor: url('cursor-circle.png'), auto;
+}
+
+.circulo {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid red;
+  background-color: transparent;
+}
+
+ion-modal {
+  --height: 60%;
+  --border-radius: 16px;
+  --box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.modal {
+  --height: 50%;
+  --border-radius: 16px;
+  --box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+canvas {
+  display: block;
+  border: 1px solid rgb(187, 178, 178);
+//  background-color: var(--ion-color-success);
+  width: 400 px;
+  height: 216 px;
+}

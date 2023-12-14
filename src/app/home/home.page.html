@@ -1,0 +1,29 @@
+<ion-content>
+
+<div class="login-box">
+  <h3 class="p-3 text-center">Login</h3>
+
+  <ion-item class="login-text1">
+    <ion-label position="floating">
+      Usuario:
+    </ion-label>
+    <ion-input name="email" [(ngModel)]="cliente.cuenta_usu" type="text" inputmode="text" class="white"></ion-input>
+  </ion-item>
+
+  <ion-item class="login-text2">
+    <ion-label position="floating">
+      Contraseña:
+    </ion-label>
+    <ion-input name="celular" [(ngModel)]="cliente.pass_usu" type="password" class="white"></ion-input>
+  </ion-item>
+  <br>
+  <div style="text-align: center;">
+  <ion-button class="btn" (click)="ingresar()" expand="block" mode="ios">Ingresar</ion-button>
+  <br><br>
+<!--   <ion-button class="btn" (click)="registrarse()" expand="block" mode="ios">Registrarse</ion-button> -->
+<!--   <ion-label (click)="resetPassword()" expand="block" mode="ios">¿Olvidaste tu contraseña?</ion-label> -->
+</div>
+
+</div>
+
+</ion-content>
