@@ -158,6 +158,7 @@ slideOpts = {
   signaturePad!: SignaturePad;
   @ViewChild('canvas') canvasEl! : ElementRef;
   signatureImg!: string;
+  observacion_detalle!: observaciones_choques_raspaduras;
 
   afuConfig = {
     multiple: false,
@@ -194,6 +195,7 @@ slideOpts = {
 };
 resetVar: any;
 swiperModules = [IonicSlides];
+isModalOpen = false;
 
   constructor(
     public alertController: AlertController,
@@ -282,6 +284,11 @@ console.log('this.vehiculoService.detalle ', this.crudService.detalle);
 //      this.crudService.uploadImage(formData);
       console.log('formData.append(image, file); ', formData.append('image', file));
     }
+  }
+
+  setOpen(isOpen: boolean, observacion: observaciones_choques_raspaduras) {
+    this.isModalOpen = isOpen;
+    this.observacion_detalle = observacion;
   }
 
   drawFirma(): void {
@@ -918,6 +925,8 @@ screenY
   }
 
   onWillDismiss(event: Event) {
+    this.isModalOpen = false;
+    console.log('event ', event);
     const ev = event as CustomEvent<OverlayEventDetail<string>>;
     if (ev.detail.role === 'confirm') {
       this.name = `Hello, ${ev.detail.data}!`;

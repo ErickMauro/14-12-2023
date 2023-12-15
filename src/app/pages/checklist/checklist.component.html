@@ -721,25 +721,27 @@
       </ion-row> -->
       <ion-row>
         <ion-list *ngFor="let observacion of crudService.observacionesChoquesRaspaduras">
-            <ion-label>{{observacion.numero}}.-{{observacion.titulo}}</ion-label>
+          <ion-item>
+            <ion-label (click)="setOpen(true, observacion)">{{observacion.numero}}.-{{observacion.titulo}}</ion-label>
+          </ion-item>
         </ion-list><!--         <ion-textarea mode="ios" auto-grow="true" disabled="true"></ion-textarea> -->
       </ion-row>
     </ion-col>
     </ion-row>
-<!--
-    <ion-modal trigger="open-detalle" (willDismiss)="onWillDismiss($event)">
+
+    <ion-modal [isOpen]="isModalOpen" trigger="openDetalle" (willDismiss)="onWillDismiss($event)">
       <ng-template>
         <ion-content class="ion-padding">
-          <ion-toolbar>
-            <ion-title>{{detalle[0].titulo}}</ion-title>
+          <ion-toolbar class="center">
+            <ion-title>{{observacion_detalle.titulo}}</ion-title>
           </ion-toolbar>
           <ion-item>
-            <ion-label>{{detalle[0].detalles}}</ion-label>
+            <ion-label>{{observacion_detalle.detalles}}</ion-label>
           </ion-item>
         </ion-content>
       </ng-template>
     </ion-modal>
- -->
+
 <br><br><br><br>
 <!--
 <ion-row>
