@@ -134,6 +134,7 @@ export interface observaciones_choques_raspaduras {
   y: number,
   medida: number,
   figura: string
+  foto_detalle: string,
 }
 
 export interface fotos_vehiculo {

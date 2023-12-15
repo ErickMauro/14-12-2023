@@ -710,7 +710,7 @@
       <ion-row>
 <!--         <ion-input (ionChange)="changeTamañoObservacion($event)"></ion-input> -->
       </ion-row>
-<!--       <ion-row>
+<!--        <ion-row>
         <ion-button (click)="takePicture()"></ion-button>
       </ion-row>
       <ion-row>
@@ -718,8 +718,8 @@
       </ion-row>
       <ion-row>
         <input (change)="newImageUpload($event)" type="file" accept="image/*" placeholder="Subir foto del producto">
-      </ion-row> -->
-      <ion-row>
+      </ion-row>
+ -->      <ion-row>
         <ion-list *ngFor="let observacion of crudService.observacionesChoquesRaspaduras">
           <ion-item>
             <ion-label (click)="setOpen(true, observacion)">{{observacion.numero}}.-{{observacion.titulo}}</ion-label>
@@ -738,7 +738,13 @@
           <ion-item>
             <ion-label>{{observacion_detalle.detalles}}</ion-label>
           </ion-item>
+          <ion-item>
+            <ion-img src="{{observacion_detalle.foto_detalle}}"></ion-img>
+          </ion-item>
         </ion-content>
+        <ion-footer>
+          <ion-button color="danger" (click)="eliminarDetalle()" >Eliminar detalle</ion-button>
+        </ion-footer>
       </ng-template>
     </ion-modal>
 

@@ -144,6 +144,7 @@ throw new Error('Method not implemented.');
   apiUrlCheckListDetalle = 'https://tcentral.mx/tc/api_pruebas/api_check_list_detalle.php';
   apiUrlCheckListVehiculo = 'https://tcentral.mx/tc/api_pruebas/api_check_list_vehiculos.php';
 //apiUrlCheckListVehiculo = 'https://tcentral.mx/tc/api_pruebas/api_check_list_vehiculos.php';
+position: any;
 slideOpts = {
   /*
       initialSlide: 0,
@@ -290,6 +291,63 @@ console.log('this.vehiculoService.detalle ', this.crudService.detalle);
     this.isModalOpen = isOpen;
     this.observacion_detalle = observacion;
   }
+
+  async eliminarDetalle(){
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: '¿Desea eliminar la observación?',
+//      message: '¿Desea guardar la observación?',
+      mode: 'ios',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          id: 'confirm-button',
+          handler: (handler) => {
+          }
+        }, {
+          text: 'Eliminar',
+          cssClass: 'secondary',
+          id: 'cancel-button',
+          handler: (alertData) => {
+            console.log('eliminarDetalle() this.crudService.observacionesChoquesRaspaduras ', this.crudService.observacionesChoquesRaspaduras);
+            const detalle = this.crudService.observacionesChoquesRaspaduras.find( (ChangePersonaje: observaciones_choques_raspaduras, index) => {
+              this.position = index;
+              console.log('Position ', this.position);
+              console.log('Index ', index);
+              console.log('ChangePersonaje ', ChangePersonaje);
+              return (ChangePersonaje.numero === this.observacion_detalle.numero);
+            });
+            console.log('eliminarDetalle() this.crudService.observacionesChoquesRaspaduras ', this.crudService.observacionesChoquesRaspaduras);
+            console.log('detalle ', detalle);
+            if(detalle !== undefined){
+              console.log('detalle !== undefined');
+              console.log('Position ', this.position);
+                    this.crudService.observacionesChoquesRaspaduras.splice(this.position, 1);
+                    const detalle = this.crudService.observacionesChoquesRaspaduras.find( (ChangePersonaje: observaciones_choques_raspaduras, index) => {
+                      if(index >= this.position && index > 0){
+                      ChangePersonaje.id = ChangePersonaje.id - 1;
+                      ChangePersonaje.numero = ChangePersonaje.numero - 1;
+                      }
+                      return (index >= this.position);
+                    });
+            }
+            console.log('eliminarDetalle() this.crudService.observacionesChoquesRaspaduras ', this.crudService.observacionesChoquesRaspaduras);
+            console.log('detalles: ', this.crudService.observacionesChoquesRaspaduras);
+            this.crudService.detalle.observaciones_choques_raspaduras = JSON.stringify(this.crudService.observacionesChoquesRaspaduras);
+            console.log('crudService.detalle.observaciones_choques_raspaduras ', this.crudService.detalle.observaciones_choques_raspaduras);
+            if(this.crudService.detalle.observaciones_choques_raspaduras = '[]'){
+            this.crudService.detalle.observaciones_choques_raspaduras = '';
+            this.crudService.deleteItemDetalle(this.apiUrlCheckListDetalle, this.crudService.detalle.id);
+            console.log('detalles: ', this.crudService.detalle.observaciones_choques_raspaduras);
+            this.isModalOpen = false;
+        }
+        },
+      }
+      ],
+    });
+    await alert.present();
+}
 
   drawFirma(): void {
     this.signaturePad = new SignaturePad(this.canvasEl.nativeElement);
@@ -566,6 +624,7 @@ screenY
               numero: this.crudService.observacionesChoquesRaspaduras.length+1,
               titulo: alertData.titulo,
               detalles: alertData.detalle,
+              foto_detalle: alertData.foto_detalle,
               x, y, medida: 10, figura: 'fill'  });
               console.log('detalle JSON.parse ', this.detalle);
             console.log('checklist.observaciones_choques_raspaduras ', this.check_list_detalle.observaciones_choques_raspaduras);
@@ -927,6 +986,8 @@ screenY
   onWillDismiss(event: Event) {
     this.isModalOpen = false;
     console.log('event ', event);
+    this.ctx.reset();
+    this.setupCanvas();
     const ev = event as CustomEvent<OverlayEventDetail<string>>;
     if (ev.detail.role === 'confirm') {
       this.name = `Hello, ${ev.detail.data}!`;
@@ -1018,7 +1079,7 @@ screenY
   }
 
   async newImage(event: any){
-    console.log('e ', event);
+    console.log('newImage(e) ', event);
 
     if(event.target.files && event.target.files[0]){
 //      this.newFileCategoria = event.target.files[0];
