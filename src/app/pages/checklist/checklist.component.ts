@@ -375,7 +375,7 @@ console.log('this.vehiculoService.detalle ', this.crudService.detalle);
       img.onload = () => {
       canvas.width = 400;
       canvas.height = 250;
-      this.ctx.drawImage(img, 0, 0, 400, 250);
+      this.ctx.drawImage(img, 0, 0, 350, 250);
       console.log('Check List Component vehiculoService.cabecero ', this.crudService.cabecero);
 //      drawCircle(this.ctx, 250, 81.0625, 10, this.check_list_detalle.observaciones_choques_raspaduras);
 this.vehiculoService.loadItemCheckListVehiculo(this.apiUrlCheckListVehiculo, this.crudService.cabecero.vin);
